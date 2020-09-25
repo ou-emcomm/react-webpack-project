@@ -6,6 +6,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/index.jsx",
+  resolve: {
+    extensions: [".js", ".jsx"]
+  },
   module: {
     rules: [
       //images and ical files
@@ -15,9 +18,9 @@ module.exports = {
         options: {
           limit: 8192,
           outputPath: "static",
-          esModule: false,
+          esModule: false
         },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       //svg files
       {
@@ -25,9 +28,9 @@ module.exports = {
         loader: "file-loader",
         options: {
           outputPath: "static",
-          esModule: false,
+          esModule: false
         },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       //fonts
       {
@@ -35,22 +38,22 @@ module.exports = {
         loader: "file-loader",
         options: {
           name: "[name].[ext]",
-          outputPath: "static/fonts",
+          outputPath: "static/fonts"
         },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       //scripts
       {
         test: /\.m?jsx?$/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"],
+        use: ["babel-loader", "eslint-loader"]
       },
       //styles
       {
         test: /\.s?[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin({
@@ -58,12 +61,12 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: "OU Counselor Conference",
-      template: "./src/index.html",
+      template: "./src/index.html"
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin()
   ],
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
+    path: path.resolve(__dirname, "dist")
+  }
 };
